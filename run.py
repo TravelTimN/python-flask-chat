@@ -6,7 +6,7 @@ app = Flask(__name__)
 messages = []
 
 def add_messages(username, message):
-    # assign current time into 'now' variable
+    # assign current time (now) into 'now' variable
     now = datetime.now().strftime("%H:%M:%S")
     # add messages to the 'messages' list above
     messages.append("[@{0}] {1}: {2}".format(now, username, message))
