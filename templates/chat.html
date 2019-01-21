@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat App - {{ username }}</title>
+</head>
+
+<body>
+
+    <h1>Welcome, {{ username }}!</h1>
+
+    <form method="post">
+        <textarea name="message" id="message" cols="50" rows="5" onkeyup="saveTxtArea(this)"></textarea>
+        <br>
+        <button onclick="sendButton()">Send Message</button>
+    </form>
+
+    {% for message in chat_messages %}
+    <p>[{{ message.timestamp }}] <b>{{ message.from }}</b>: {{ message.message }}</p>
+    {% endfor %}
+
+    <script>
+        // get textarea using #id
+        let textarea = document.getElementById("message");
+        textarea.value = getSavedValue("message");
+
+        function saveTxtArea(e) {
+            var id = e.id;
+            var val = e.value;
+            localStorage.setItem(id, val);
+        };
+        let timer = setTimeout(function () {
+            location.reload();
+        }, 10000)
+        textarea.focus();
+
+        function getSavedValue(v) {
+            if (localStorage.getItem(v) === null) {
+                return "";
+            }
+            return localStorage.getItem(v);
+        };
+        textarea.value += getSavedValue();
+
+        function sendButton() {
+            localStorage.clear();
+        };
+
+        // setTimeout for 10s
+        /*let timer = setTimeout(function () {
+            location.reload();
+        }, 5000)*/
+
+        // if textarea
+        /*textarea.onkeydown = function(e) {
+            clearTimeout(timer)
+            timer = setTimeout(function() {
+                location.reload();
+            }, 10000)    
+        }*/
+    </script>
+
+</body>
+
+</html>
