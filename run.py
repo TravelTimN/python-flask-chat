@@ -60,6 +60,6 @@ def send_message(username, message):
         return redirect(username)
 """
 
-app.run(host=os.getenv("IP", "0.0.0.0"),
+app.run(host=os.getenv("IP", "127.0.0.1"),
         port=os.getenv("PORT", "5000"),
         debug=False)
